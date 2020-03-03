@@ -8,10 +8,10 @@ namespace Game.Infrastructure.Models
 {
 	public class Block : DataTransferObject
 	{
+		public int Id { get; set; }
+		
 		public Position Position { get; set; }
 		
 		public string Name { set; get; }
-    	
-    	public List<Block> Blocks { set; get; }
 	}
 }

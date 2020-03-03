@@ -66,6 +66,13 @@
     <Compile Include="Assets\Common\Controller\LevelController.cs" />
     <Compile Include="Assets\Common\Controller\PlayerMovementController.cs" />
     <Compile Include="Assets\Common\GameModelsTemplates.cs" />
+    <Compile Include="Assets\Common\Model\Block\BlockBase.cs" />
+    <Compile Include="Assets\Common\Model\Block\BlockFactory.cs" />
+    <Compile Include="Assets\Common\Model\Block\BlockResult.cs" />
+    <Compile Include="Assets\Common\Model\Block\StoneBlock.cs" />
+    <Compile Include="Assets\Common\Model\Interfaces\ICallable.cs" />
+    <Compile Include="Assets\Common\Model\Interfaces\IInitialized.cs" />
+    <Compile Include="Assets\Common\Model\Interfaces\IResult.cs" />
     <Compile Include="Assets\Common\Structure\BlocksIdentifiers.cs" />
     <Compile Include="Assets\Infrastructure\DataTransfer\DataTransferObject.cs" />
     <Compile Include="Assets\Infrastructure\Models\Block.cs" />
@@ -629,7 +636,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Common\Model" />
+    <Folder Include="Assets\Common\Model\Block" />
+    <Folder Include="Assets\Common\Model\Interfaces" />
     <Folder Include="Assets\Infrastructure\DataTransfer" />
+    <Folder Include="Assets\Infrastructure\Extensions" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

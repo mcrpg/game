@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Assets.Infrastructure.Structures
+namespace Game.Infrastructure.Structures
 {
 	public static class LevelConstants
 	{
