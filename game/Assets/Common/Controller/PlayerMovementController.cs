@@ -1,8 +1,14 @@
 ﻿using System;
 
+using System.Collections;
+
+using System.Collections.Generic;
+
 using UnityEngine;
 
 using Game.Common.Controller.Interfaces;
+
+using static UnityEngine.Rigidbody;
 
 namespace Game.Common.Controller
 {
@@ -14,10 +20,14 @@ namespace Game.Common.Controller
 		public KeyCode leftKey = KeyCode.A;
 		public KeyCode backKey = KeyCode.S;
 		public KeyCode rightKey = KeyCode.D;
+		public KeyCode space = KeyCode.Space;
 		
 		public float sensitivityX = 15F;
 		public float sensitivityY = 15F;
 		 
+		public float jumpForce = 6;
+		public bool jumpPossible = true;
+
 		public float minimumX = -360F;
 		public float maximumX = 360F;
 		
@@ -33,10 +43,12 @@ namespace Game.Common.Controller
 		
 		private GameObject playerGameObject;
 		
+		private Rigidbody rb;
+		
 		public override void OnEnabled()
 		{
 			playerGameObject = Common.Context.playerGameObject;
-			
+			rb = playerGameObject.GetComponent<Rigidbody>();
 			playerGameObject.GetComponent<Rigidbody>().freezeRotation = true;
 			originalRotation = playerGameObject.transform.localRotation;
 		}
@@ -58,11 +70,15 @@ namespace Game.Common.Controller
 			
 			result = (new Vector3(playerGameObject.transform.forward.x, Vector3.forward.y, playerGameObject.transform.forward.z)) 
 				* Time.deltaTime * moveSpeed;
-			
+
 			if (Input.GetKey(KeyCode.W)) playerGameObject.transform.position += result;
 			else if (Input.GetKey(KeyCode.S)) playerGameObject.transform.position -= result;
+
+			if (canJump() == true && Input.GetKeyDown(KeyCode.Space))
+			{				
+				rb.AddForce(Vector3.up*jumpForce, ForceMode.Impulse);
+			}
 		}
-		
 		private float ClampAngle(float angle, float min, float max)
 		{
 			if (angle < -360F) angle += 360F;
@@ -70,5 +86,11 @@ namespace Game.Common.Controller
 			
 			return Mathf.Clamp(angle, min, max);
 		}
+
+		public bool canJump()
+		{
+			return Physics.Raycast(playerGameObject.transform.position, Vector3.down, 2.1f);
+		}
+
 	}
 }
