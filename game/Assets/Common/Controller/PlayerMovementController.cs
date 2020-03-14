@@ -1,14 +1,11 @@
 ﻿using System;
 
 using System.Collections;
-
 using System.Collections.Generic;
 
 using UnityEngine;
 
 using Game.Common.Controller.Interfaces;
-
-using static UnityEngine.Rigidbody;
 
 namespace Game.Common.Controller
 {
@@ -26,7 +23,6 @@ namespace Game.Common.Controller
 		public float sensitivityY = 15F;
 		 
 		public float jumpForce = 6;
-		public bool jumpPossible = true;
 
 		public float minimumX = -360F;
 		public float maximumX = 360F;
@@ -91,6 +87,5 @@ namespace Game.Common.Controller
 		{
 			return Physics.Raycast(playerGameObject.transform.position, Vector3.down, 2.1f);
 		}
-
 	}
 }
