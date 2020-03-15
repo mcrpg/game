@@ -1,8 +1,5 @@
 ﻿using System;
 
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 
 using Game.Common.Controller.Interfaces;
@@ -45,7 +42,7 @@ namespace Game.Common.Controller
 		{
 			playerGameObject = Common.Context.playerGameObject;
 			rb = playerGameObject.GetComponent<Rigidbody>();
-			playerGameObject.GetComponent<Rigidbody>().freezeRotation = true;
+			rb.freezeRotation = true;
 			originalRotation = playerGameObject.transform.localRotation;
 		}
 		
@@ -70,7 +67,7 @@ namespace Game.Common.Controller
 			if (Input.GetKey(KeyCode.W)) playerGameObject.transform.position += result;
 			else if (Input.GetKey(KeyCode.S)) playerGameObject.transform.position -= result;
 
-			if (canJump() == true && Input.GetKeyDown(KeyCode.Space))
+			if (canJump() == true && Input.GetKeyDown(space))
 			{				
 				rb.AddForce(Vector3.up*jumpForce, ForceMode.Impulse);
 			}
@@ -82,7 +79,6 @@ namespace Game.Common.Controller
 			
 			return Mathf.Clamp(angle, min, max);
 		}
-
 		public bool canJump()
 		{
 			return Physics.Raycast(playerGameObject.transform.position, Vector3.down, 2.1f);
